@@ -1,0 +1,111 @@
+esphome:
+  name: esphome-gas-analyzer-sgp
+  friendly_name: gas-analyzer-sgp
+
+esp8266:
+  board: d1_mini_pro
+
+logger:
+
+api:
+  encryption:
+    key: "<key here>"
+
+ota:
+  - platform: esphome
+  
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: none
+  enable_on_boot: True
+  output_power: 20dB
+
+i2c:
+  sda: D2
+  scl: D1
+  scan: true
+  id: bus_i2c
+
+button:
+  - platform: restart
+    name: esphome_mq135_restart
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+
+  - platform: homeassistant
+    name: "HA Temperature"
+    id: ha_temperature
+    entity_id: sensor.local_weather_temperature
+
+  - platform: homeassistant
+    name: "HA Humidity"
+    id: ha_humidity
+    entity_id: sensor.local_weather_humidity
+
+  - platform: ens160_i2c
+    address: 0x53
+    eco2:
+      name: "ENS160 eCO2"
+    tvoc:
+      name: "ENS160 TVOC"
+    aqi:
+      id: ens160_air_quality_index
+      name: "ENS160 AQI"
+    compensation:
+      temperature: ha_temperature
+      humidity: ha_humidity
+
+  - platform: sgp4x
+    voc:
+      name: "Local weather VOC Index Raw"
+      id: voc_raw
+    nox:
+      name: "Local weather NOx Index Raw"
+      id: nox_raw
+    compensation:
+      humidity_source: ha_humidity
+      temperature_source: ha_temperature
+    update_interval: 60s
+
+  - platform: copy
+    source_id: voc_raw
+    name: "Local weather VOC Index"
+    filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
+
+  - platform: copy
+    source_id: nox_raw
+    name: "Local weather NOx Index"
+    filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
+
+  - platform: adc
+    name: "Local weather Wind speed Raw"
+    id: wind_raw
+    pin: A0
+    update_interval: 10s
+    device_class: wind_speed
+
+  - platform: copy
+    name: "Local weather Wind speed"
+    source_id: wind_raw
+    device_class: wind_speed
+    filters:
+      - multiply: 14
+
+  - platform: copy
+    name: "Local weather Wind speed Avg"
+    source_id: wind_raw
+    device_class: wind_speed
+    filters:
+      - multiply: 14
+      - sliding_window_moving_average: 
+          window_size: 30
+          send_every: 30

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1800" height="1200" viewBox="0 0 1800 1200">
+  <defs>
+    <style>
+      .bg{fill:#f4f6fa}.card{fill:#fff;stroke:#cbd3e1;stroke-width:2}.title{font-family:Arial,sans-serif;font-size:32px;font-weight:700;fill:#172033}.sub{font-family:Arial,sans-serif;font-size:17px;fill:#57647a}.name{font-family:Arial,sans-serif;font-size:22px;font-weight:700;fill:#172033}.text{font-family:Arial,sans-serif;font-size:16px;fill:#303c52}.pin{font-family:Menlo,monospace;font-size:14px;font-weight:700;fill:#172033}.tag{fill:#fff;stroke-width:2}.scl{stroke:#8e44ad;fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter}.sda{stroke:#2477c9;fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter}.vcc{stroke:#d43b35;fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter}.gnd{stroke:#252525;fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter}.adc{stroke:#e18a12;fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter}.dot-scl{fill:#fff;stroke:#8e44ad;stroke-width:6}.dot-sda{fill:#fff;stroke:#2477c9;stroke-width:6}.dot-vcc{fill:#fff;stroke:#d43b35;stroke-width:6}.dot-gnd{fill:#fff;stroke:#252525;stroke-width:6}.dot-adc{fill:#fff;stroke:#e18a12;stroke-width:6}.legend{font-family:Arial,sans-serif;font-size:15px;fill:#303c52}.caption{font-family:Arial,sans-serif;font-size:13px;fill:#68758a}.wire-label{font-family:Arial,sans-serif;font-size:13px;font-weight:700}
+    </style>
+    <clipPath id="windclip"><rect x="70" y="245" width="420" height="300" rx="12"/></clipPath>
+    <clipPath id="ensclip"><rect x="690" y="240" width="360" height="360" rx="12"/></clipPath>
+    <clipPath id="sgpclip"><rect x="1310" y="240" width="380" height="380" rx="12"/></clipPath>
+    <clipPath id="d1clip"><rect x="110" y="700" width="340" height="340" rx="12"/></clipPath>
+  </defs>
+
+  <rect class="bg" width="1800" height="1200"/>
+  <text x="55" y="55" class="title">Газоанализатор ESP8266 — монтажная схема</text>
+  <text x="55" y="87" class="sub">WeMos D1 mini Pro • ENS160+AHT2x • SGP41 • аналоговый анемометр 0–5 В</text>
+
+  <rect x="55" y="110" width="1690" height="44" rx="10" fill="#fff" stroke="#d9dfe9"/>
+  <line x1="85" y1="132" x2="130" y2="132" class="vcc"/><text x="142" y="137" class="legend">+5V / VIN</text>
+  <line x1="260" y1="132" x2="305" y2="132" class="gnd"/><text x="317" y="137" class="legend">GND</text>
+  <line x1="400" y1="132" x2="445" y2="132" class="scl"/><text x="457" y="137" class="legend">SCL</text>
+  <line x1="535" y1="132" x2="580" y2="132" class="sda"/><text x="592" y="137" class="legend">SDA</text>
+  <line x1="670" y1="132" x2="715" y2="132" class="adc"/><text x="727" y="137" class="legend">VOUT</text>
+  <text x="1715" y="137" text-anchor="end" class="legend">I²C: ENS160 0x53 • SGP41 0x59</text>
+
+  <!-- Real component photographs -->
+  <rect x="50" y="170" width="460" height="400" rx="16" class="card"/>
+  <text x="280" y="207" text-anchor="middle" class="name">Аналоговый анемометр</text>
+  <text x="280" y="230" text-anchor="middle" class="caption">Два проводника: VOUT и GND</text>
+  <image x="70" y="245" width="420" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#windclip)" xlink:href="schematic-assets/anemometer.jpg"/>
+
+  <rect x="620" y="165" width="500" height="470" rx="16" class="card"/>
+  <text x="870" y="202" text-anchor="middle" class="name">ENS160 + AHT2x</text>
+  <text x="870" y="225" text-anchor="middle" class="caption">Контакты VIN, GND, SCL, SDA • адрес 0x53</text>
+  <image x="690" y="240" width="360" height="360" preserveAspectRatio="xMidYMid meet" clip-path="url(#ensclip)" xlink:href="schematic-assets/ens160-user.jpeg"/>
+
+  <rect x="1240" y="165" width="500" height="470" rx="16" class="card"/>
+  <text x="1490" y="202" text-anchor="middle" class="name">SGP41</text>
+  <text x="1490" y="225" text-anchor="middle" class="caption">Контакты VIN, GND, SCL, SDA • адрес 0x59</text>
+  <image x="1310" y="240" width="380" height="380" preserveAspectRatio="xMidYMid meet" clip-path="url(#sgpclip)" xlink:href="schematic-assets/sgp41-user-aligned.png"/>
+
+  <rect x="50" y="670" width="460" height="470" rx="16" class="card"/>
+  <image x="110" y="700" width="340" height="340" preserveAspectRatio="xMidYMid meet" clip-path="url(#d1clip)" xlink:href="schematic-assets/d1-mini-pro-user.webp"/>
+  <text x="280" y="1082" text-anchor="middle" class="name">WeMos D1 mini Pro</text>
+  <text x="280" y="1107" text-anchor="middle" class="caption">ESP8266 • D1/GPIO5 • D2/GPIO4 • A0</text>
+
+  <!-- A0 is the only WeMos connection routed from the left -->
+  <path d="M199 826 H25 V600 H302 V524" class="adc"/>
+
+  <!-- Continuous SCL net: WeMos D1 -> ENS160 -> SGP41 -->
+  <path d="M357 843 H560 V680 H1506 V540" class="scl"/>
+  <path d="M859 680 V520" class="scl"/>
+
+  <!-- Continuous SDA net: WeMos D2 -> ENS160 -> SGP41 -->
+  <path d="M357 860 H600 V720 H1565 V540" class="sda"/>
+  <path d="M888 720 V520" class="sda"/>
+
+  <!-- Continuous GND net: WeMos, anemometer, ENS160 and SGP41 -->
+  <path d="M318 760 H1447 V540" class="gnd"/>
+  <path d="M318 760 V524" class="gnd"/>
+  <path d="M357 911 H640 V760" class="gnd"/>
+  <path d="M830 760 V520" class="gnd"/>
+
+  <!-- Continuous +5V net: WeMos -> ENS160 -> SGP41 -->
+  <path d="M357 928 H680 V800 H1386 V540" class="vcc"/>
+  <path d="M773 800 V520" class="vcc"/>
+
+  <!-- Rings mark exact contacts in the photographs -->
+  <circle cx="199" cy="826" r="8" class="dot-adc"/><circle cx="357" cy="928" r="8" class="dot-vcc"/>
+  <circle cx="357" cy="843" r="8" class="dot-scl"/><circle cx="357" cy="860" r="8" class="dot-sda"/><circle cx="357" cy="911" r="8" class="dot-gnd"/>
+  <circle cx="302" cy="524" r="8" class="dot-adc"/><circle cx="318" cy="524" r="8" class="dot-gnd"/>
+  <circle cx="773" cy="520" r="8" class="dot-vcc"/><circle cx="830" cy="520" r="8" class="dot-gnd"/><circle cx="859" cy="520" r="8" class="dot-scl"/><circle cx="888" cy="520" r="8" class="dot-sda"/>
+  <circle cx="1386" cy="540" r="8" class="dot-vcc"/><circle cx="1447" cy="540" r="8" class="dot-gnd"/><circle cx="1506" cy="540" r="8" class="dot-scl"/><circle cx="1565" cy="540" r="8" class="dot-sda"/>
+
+  <!-- Junction dots: diameter is slightly larger than conductor width -->
+  <circle cx="859" cy="680" r="5" fill="#8e44ad"/>
+  <circle cx="888" cy="720" r="5" fill="#2477c9"/>
+  <circle cx="640" cy="760" r="5" fill="#252525"/>
+  <circle cx="830" cy="760" r="5" fill="#252525"/>
+  <circle cx="773" cy="800" r="5" fill="#d43b35"/>
+
+  <!-- Anemometer contact label -->
+  <rect x="235" y="485" width="74" height="25" rx="7" class="tag" stroke="#e18a12"/><text x="272" y="502" text-anchor="middle" class="pin">VOUT</text>
+
+  <text x="55" y="1170" class="caption">Фото ENS160, SGP41 и WeMos предоставлены пользователем • Фото анемометра: Wikimedia Commons</text>
+</svg>
