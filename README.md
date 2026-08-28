@@ -2,7 +2,7 @@
 
 Устройство собирает показатели качества воздуха с двух цифровых датчиков и дополняет их данными о скорости ветра. Контроллер работает под управлением ESPHome и передаёт результаты в Home Assistant.
 
-Схема подключения: [`esp8266-gas-analyzer-schematic.png`](esp8266-gas-analyzer-schematic.png). Векторный исходник: [`esp8266-gas-analyzer-schematic.svg`](esp8266-gas-analyzer-schematic.svg).
+Схема подключения: [`esp8266-gas-analyzer-schematic.png`](schematic/esp8266-gas-analyzer-schematic.png). Векторный исходник: [`esp8266-gas-analyzer-schematic.svg`](schematic/esp8266-gas-analyzer-schematic.svg).
 
 ## Состав устройства
 
