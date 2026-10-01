@@ -2,8 +2,6 @@
 
 Устройство собирает показатели качества воздуха с двух цифровых датчиков и дополняет их данными о скорости ветра. Контроллер работает под управлением ESPHome и передаёт результаты в Home Assistant.
 
-Схема подключения: [`esp8266-gas-analyzer-schematic.png`](schematic/esp8266-gas-analyzer-schematic.png). Векторный исходник: [`esp8266-gas-analyzer-schematic.svg`](schematic/esp8266-gas-analyzer-schematic.svg).
-
 ## Состав устройства
 
 В основе проекта — WeMos D1 mini Pro на ESP8266. К нему подключены:
@@ -14,7 +12,11 @@
 
 ENS160 и SGP41 работают на общей шине I²C. Анемометр подключён к аналоговому входу контроллера.
 
+Расположение элементов внутри: [`device.png`](schematic/device.png)
+
 ## Подключение
+
+Схема подключения: [`esp8266-gas-analyzer-schematic.png`](schematic/esp8266-gas-analyzer-schematic.png). Векторный исходник: [`esp8266-gas-analyzer-schematic.svg`](schematic/esp8266-gas-analyzer-schematic.svg).
 
 | WeMos D1 mini Pro | ENS160 + AHT2x | SGP41 | Анемометр |
 |---|---|---|---|
